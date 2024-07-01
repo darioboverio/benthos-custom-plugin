@@ -1,0 +1,18 @@
+{
+    "field_to_hash": "pii value to hash",
+    "field_to_encrypt": "pii value to encrypt",
+    "obj": {
+        "nested_field": "pii value to blank"
+    },
+    "mappings": [
+        {
+            "expression": "root.field_to_hash = this.field_to_hash.hash(\"sha1\").encode(\"hex\")"
+        },
+        {
+            "expression": "root.field_to_encrypt = encrypt_rsa(\"key\", this.field_to_encrypt)"
+        },
+        {
+            "expression": "root.obj.nested_field = \"intentionally blank\""
+        }
+    ]
+}

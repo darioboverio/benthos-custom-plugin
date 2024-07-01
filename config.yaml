@@ -1,0 +1,15 @@
+input:
+  file:
+    paths: [./test-files/input.json]
+    codec: all-bytes
+
+pipeline:
+  processors:
+    - bloblang: |
+        root = this.mappings.fold(this.without("mappings"), m -> m.tally.bloblang("root = this \n " + m.value.expression))
+
+output:
+  file:
+    path: ./test-files/output.json 
+    codec: lines
+
